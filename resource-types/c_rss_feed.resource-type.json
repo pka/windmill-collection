@@ -1,0 +1,19 @@
+{
+  "workspace_id": "sourcepole",
+  "name": "c_rss_feed",
+  "schema": {
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "url"
+    ],
+    "properties": {
+      "url": {
+        "type": "string",
+        "default": "",
+        "description": "Feed URL"
+      }
+    }
+  },
+  "description": "RSS Feed"
+}

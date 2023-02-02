@@ -1,0 +1,19 @@
+{
+  "workspace_id": "sourcepole",
+  "name": "c_slackapi",
+  "schema": {
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "required": [
+      "url"
+    ],
+    "properties": {
+      "url": {
+        "type": "string",
+        "default": "",
+        "description": "API URL (e.g. https://mattermost.intern.mycompany.com/hooks/abcdefg1234567). Includes secret token!"
+      }
+    }
+  },
+  "description": "Slack compatible API endpoint"
+}
