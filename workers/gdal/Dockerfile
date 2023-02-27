@@ -1,4 +1,4 @@
-FROM python:3.11.1-slim-buster as worker_base
+FROM python:3.11.1-slim-bullseye as worker_base
 
 ARG APP=/usr/src/app
 
