@@ -1,7 +1,6 @@
 import * as wmill from "https://deno.land/x/windmill@v1.60.0/mod.ts"
 import { parse } from "https://deno.land/x/xml/mod.ts";
 
-
 export async function main(rss_feed: wmill.Resource<"c_rss_feed">) {
 
   let feedStates = await wmill.getInternalState() || {};
