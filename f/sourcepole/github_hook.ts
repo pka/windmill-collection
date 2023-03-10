@@ -1,7 +1,13 @@
 export async function main(
-  web_request: Object
+  ref: string,
+  head_commit: Object
 ) {
-  const maxlen = 500 - 1 - 23; // https://docs.joinmastodon.org/user/posting/
-  var message = web_request.head_commit.message.slice(0, maxlen);
-  return `${message} ${web_request.head_commit.url}`;
+  var branch_or_tag = ref.replace(/.+\//, "");
+
+  // Limit commit message text
+  const linklen = 23;  // https://docs.joinmastodon.org/user/posting/
+  const maxlen = 500 - 2 - branch_or_tag.length - 2 - linklen;
+  var message = head_commit.message.slice(0, maxlen);
+
+  return `${message} [${branch_or_tag}] ${head_commit.url}`;
 }
