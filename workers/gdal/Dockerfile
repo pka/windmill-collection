@@ -31,3 +31,5 @@ RUN apt-get update -yqq && \
 ENV DISABLE_SERVER=true
 ENV DENO_PATH=/usr/bin/deno
 ENV PYTHON_PATH=/usr/local/bin/python3
+ENV WORKER_TAGS=deno,python3,bash,flow,hub,dependency,gdal
+ENV CUSTOM_TAGS=gdal
