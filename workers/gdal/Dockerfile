@@ -10,7 +10,7 @@ ENV TZ=Etc/UTC
 
 RUN /usr/local/bin/python3 -m pip install pip-tools
 
-COPY --from=ghcr.io/windmill-labs/windmill:1.75.0 /usr/src/app/windmill ${APP}/windmill
+COPY --from=ghcr.io/windmill-labs/windmill:1.89.0 /usr/src/app/windmill ${APP}/windmill
 
 COPY --from=denoland/deno:latest /usr/bin/deno /usr/bin/deno
 
