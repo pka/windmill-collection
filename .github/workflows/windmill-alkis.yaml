@@ -1,0 +1,56 @@
+name: Build and publish windmill-alkis docker image
+
+on:
+  push:
+    paths:
+      - workers/alkis/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+
+    - uses: actions/checkout@master
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build and publish latest docker image
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      with:
+        name: sourcepole/windmill-alkis
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        tags: latest
+        workdir: workers/alkis/
+
+    - name: Check whether version file has changed
+      uses: dorny/paths-filter@v2
+      id: paths_filter
+      with:
+        base: ${{ github.ref }}
+        filters: |
+          alkis_version:
+            - 'workers/alkis/version.txt'
+
+    - name: Get version tag from file
+      id: get_tag
+      if: steps.paths_filter.outputs.alkis_version == 'true'
+      run: |
+        version_tag=$(cat workers/alkis/version.txt || echo 'latest')
+        echo "Read version file: $version_tag"
+        echo "tag=$version_tag" >>$GITHUB_OUTPUT
+
+    - name: Build and publish tagged docker image
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      if: steps.paths_filter.outputs.alkis_version == 'true'
+      with:
+        name: sourcepole/windmill-alkis
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        tags: ${{ steps.get_tag.outputs.tag }}
+        workdir: workers/alkis/
