@@ -1,0 +1,41 @@
+name: Build and publish windmill-osm docker image
+
+on:
+  push:
+    paths:
+      - workers/osm/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+
+    - uses: actions/checkout@master
+
+    - name: Build and publish latest docker image
+      run: |
+        echo "Build latest image"
+
+    - name: Check whether version file has changed
+      uses: dorny/paths-filter@v2
+      id: paths_filter
+      with:
+        filters: |
+          osm_version:
+            - 'workers/osm/version.txt'
+
+    - name: Get version tag from file
+      id: get_tag
+      if: steps.paths_filter.outputs.osm_version == 'true'
+      run: |
+        version_tag=$(cat workers/osm/version.txt || echo 'latest')
+        echo "Read version file: $version_tag"
+        echo "tag=$version_tag" >>$GITHUB_OUTPUT
+
+    - name: Build and publish tagged docker image
+      if: steps.paths_filter.outputs.osm_version == 'true'
+      run: |
+        echo "Build tagged image: ${{ steps.get_tag.outputs.tag }}"
