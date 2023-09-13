@@ -1,6 +1,6 @@
 # NOTE: does not use sourcepole/windmill-gdal as base image, but extends 3dcitydb/impexp image
 
-ARG WINDMILL_IMAGE_TAG='1.128.0'
+ARG WINDMILL_IMAGE_TAG='1.171.0'
 ARG CITYDB_IMAGE_TAG='15-3.3-4.4.0'
 ARG CITYDB_IMPEXP_IMAGE_TAG='5.3.0'
 
