@@ -1,6 +1,6 @@
 ARG PYTHON_IMAGE_TAG='3.11-slim-bullseye'
-ARG WINDMILL_IMAGE_TAG='1.128.0'
-ARG DENO_IMAGE_TAG='1.35.0'
+ARG WINDMILL_IMAGE_TAG='1.171.0'
+ARG DENO_IMAGE_TAG='1.36.3'
 
 FROM ghcr.io/windmill-labs/windmill:${WINDMILL_IMAGE_TAG} as windmill
 FROM denoland/deno:${DENO_IMAGE_TAG} as deno
