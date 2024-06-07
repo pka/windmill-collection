@@ -1,4 +1,4 @@
-ARG PYTHON_IMAGE_TAG='3.12-slim-bullseye'
+ARG PYTHON_IMAGE_TAG='3.12-slim-bookworm'
 ARG WINDMILL_IMAGE_TAG='1.342.0'
 ARG DENO_IMAGE_TAG='1.44.1'
 
@@ -40,7 +40,6 @@ RUN apt-get update -yqq && \
     apt-get install -yqq \
             gdal-bin python3-gdal fiona python3-fiona rasterio python3-rasterio \
             postgresql-client && \
-    apt-get install -y --no-install-recommends pdal && \
     rm -rf /var/lib/apt/lists/*
 
 ENV WORKER_TAGS=gdal,deno,python3,bash,flow,hub,dependency
